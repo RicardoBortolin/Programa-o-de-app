@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulador de Loteria</title>
+</head>
+<body>
+    <h1>Simulador de Loteria</h1>
+    <label for="loteria">Escolha o tipo de loteria:</label>
+    <select id="loteria">
+        <option value="quina">Quina</option>
+        <option value="sena">Sena</option>
+        <option value="lotomania">Lotomania</option>
+    </select>
+    <button onclick="gerarNumeros()">Gerar Números</button>
+    
+    <h2>Números sorteados:</h2>
+    <p id="resultado"></p>
+
+    <script>
+        function gerarNumeros() {
+            const tipoLoteria = document.getElementById('loteria').value;
+            let quantidadeNumeros;
+            let limiteNumeros;
+
+            if (tipoLoteria === 'quina') {
+                quantidadeNumeros = 5;
+                limiteNumeros = 80;
+            } else if (tipoLoteria === 'sena') {
+                quantidadeNumeros = 6;
+                limiteNumeros = 60;
+            } else if (tipoLoteria === 'lotomania') {
+                quantidadeNumeros = 50;
+                limiteNumeros = 100;
+            }
+
+            let numerosSorteados = new Set();
+
+            while (numerosSorteados.size < quantidadeNumeros) {
+                const numeroAleatorio = Math.floor(Math.random() * limiteNumeros) + 1;
+                numerosSorteados.add(numeroAleatorio);
+            }
+
+            document.getElementById('resultado').innerText = Array.from(numerosSorteados).join(', ');
+        }
+    </script>
+</body>
+</html>
